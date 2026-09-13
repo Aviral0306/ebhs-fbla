@@ -523,6 +523,8 @@ header {
   margin: 0 auto;
 
   padding: 0 20px;
+
+  overflow: visible;
 }
 
 
@@ -581,6 +583,14 @@ header {
   white-space: nowrap;
 }
 
+.h-event {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.h-event:focus {
+  outline: none;
+}
 
 .h-event {
   position: absolute;
@@ -620,7 +630,9 @@ header {
 }
 
 
-.h-event:hover .h-dot {
+.h-event:hover .h-dot,
+.h-event:focus .h-dot,
+.h-event.tooltip-open .h-dot {
   transform: scale(1.25);
 }
 
@@ -680,7 +692,9 @@ header {
 }
 
 
-.h-event:hover .h-tooltip {
+.h-event:hover .h-tooltip,
+.h-event:focus .h-tooltip,
+.h-event.tooltip-open .h-tooltip {
   opacity: 1;
 
   visibility: visible;
@@ -1686,7 +1700,7 @@ header {
       1.5rem
       3rem;
 
-    overflow-x: auto;
+    overflow-x: visible;
   }
 
   #schedule h2 {

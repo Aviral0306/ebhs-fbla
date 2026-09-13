@@ -860,3 +860,65 @@ document.addEventListener(
 
   }
 );
+
+// ============================================================
+// TIMELINE TOOLTIPS
+//
+// Adds click/tap support for Safari and mobile devices.
+// Desktop hover continues to work normally.
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const timelineEvents =
+    document.querySelectorAll(".h-event");
+
+
+  timelineEvents.forEach(function (event) {
+
+    // Makes the event keyboard-focusable too
+    event.setAttribute("tabindex", "0");
+
+
+    event.addEventListener("click", function (e) {
+
+      e.stopPropagation();
+
+
+      const alreadyOpen =
+        event.classList.contains("tooltip-open");
+
+
+      // Close every other tooltip first
+      timelineEvents.forEach(function (otherEvent) {
+
+        otherEvent.classList.remove("tooltip-open");
+
+      });
+
+
+      // Toggle the one that was clicked
+      if (!alreadyOpen) {
+
+        event.classList.add("tooltip-open");
+
+      }
+
+    });
+
+  });
+
+
+  // Clicking anywhere else closes the tooltip
+
+  document.addEventListener("click", function () {
+
+    timelineEvents.forEach(function (event) {
+
+      event.classList.remove("tooltip-open");
+
+    });
+
+  });
+
+});
