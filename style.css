@@ -1493,3 +1493,501 @@ header {
   }
 
 }
+
+
+/* ============================================================
+   MOBILE / TABLET IMPROVEMENTS
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  /* ---------- NAV ---------- */
+
+  nav {
+    padding: 0.9rem 1.2rem;
+  }
+
+  nav .nav-inner {
+    gap: 1rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  nav ul {
+    gap: 1.2rem;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  nav ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav a {
+    white-space: nowrap;
+
+    font-size: 0.9rem;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  header {
+    min-height: auto;
+
+    padding:
+      2rem
+      1.5rem
+      5rem;
+  }
+
+  .hero-flex {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 3rem;
+
+    margin-top: 2rem;
+  }
+
+  .logo-frame {
+    width: min(85vw, 360px);
+  }
+
+  .logo-frame img {
+    width: 100%;
+    height: auto;
+
+    aspect-ratio: 1 / 1;
+  }
+
+  .hero-text {
+    text-align: center;
+
+    flex: none;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(3rem, 12vw, 4rem);
+  }
+
+  .hero-text h2 {
+    font-size: 1.25rem;
+  }
+
+  .hero-text p {
+    max-width: 100%;
+
+    font-size: 1rem;
+
+    line-height: 1.65;
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .scroll-down {
+    display: none;
+  }
+
+
+  /* ---------- GENERAL SECTIONS ---------- */
+
+  #about,
+  #schedule,
+  #exec-board {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+
+  /* ---------- ABOUT ---------- */
+
+  .about-intro {
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+    margin-bottom: 3rem;
+  }
+
+  .about-heading h2 {
+    font-size: 2.8rem;
+  }
+
+  .about-description {
+    padding-top: 0;
+  }
+
+  .about-description p {
+    font-size: 1rem;
+  }
+
+
+  /* ---------- ABOUT CAROUSEL ---------- */
+
+  .about-gallery-section {
+    padding:
+      1.2rem
+      0.8rem;
+
+    margin-bottom: 4rem;
+  }
+
+  .about-carousel {
+    gap: 0.5rem;
+  }
+
+  .about-photo,
+  .about-photo-placeholder {
+    height: 360px;
+  }
+
+  .about-carousel-arrow {
+    width: 40px;
+    height: 40px;
+
+    font-size: 1rem;
+  }
+
+
+  /* ---------- WHAT IS FBLA ---------- */
+
+  .fbla-info {
+    grid-template-columns: 1fr;
+
+    gap: 1.8rem;
+
+    padding: 2.5rem 2rem;
+  }
+
+  .fbla-info-heading h2 {
+    font-size: 2.5rem;
+  }
+
+
+  /* ---------- SCHEDULE ---------- */
+
+  .schedule-panel {
+    padding:
+      2.5rem
+      1.5rem
+      3rem;
+
+    overflow-x: auto;
+  }
+
+  #schedule h2 {
+    font-size: 2.6rem;
+
+    margin-bottom: 2rem;
+  }
+
+  /*
+    Don't squeeze 9 months into a phone screen.
+    Instead, let the timeline scroll horizontally.
+  */
+
+  .date-timeline {
+    min-width: 800px;
+
+    height: 160px;
+  }
+
+
+  /* ---------- EXEC BOARD ---------- */
+
+  .exec-panel {
+    padding:
+      2.5rem
+      1.2rem
+      3rem;
+  }
+
+  #exec-board h2 {
+    font-size: 3rem;
+
+    margin-bottom: 2rem;
+  }
+
+  .exec-carousel {
+    gap: 0.6rem;
+  }
+
+  .carousel-arrow {
+    width: 42px;
+    height: 42px;
+
+    font-size: 1.1rem;
+  }
+
+  /*
+    Two board cards per page on tablets.
+  */
+
+  .exec-card {
+    flex:
+      0 0
+      calc((100% - 1rem) / 2);
+
+    padding:
+      1.5rem
+      1rem
+      1.8rem;
+  }
+
+  .exec-cards {
+    gap: 1rem;
+  }
+
+  .exec-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+
+/* ============================================================
+   PHONES
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  /* ---------- NAV ---------- */
+
+  nav {
+    padding:
+      0.8rem
+      1rem;
+  }
+
+  nav .nav-inner {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.6rem;
+  }
+
+  nav ul {
+    width: 100%;
+
+    gap: 1.4rem;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  header {
+    padding:
+      1.5rem
+      1.2rem
+      4rem;
+  }
+
+  .hero-flex {
+    gap: 2.5rem;
+
+    margin-top: 1rem;
+  }
+
+  .logo-frame {
+    width: min(82vw, 320px);
+  }
+
+  .logo-frame::before {
+    top: 12px;
+    left: 12px;
+  }
+
+  .hero-text h1 {
+    font-size: 3.2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.15rem;
+
+    line-height: 1.4;
+  }
+
+  .hero-text p {
+    font-size: 0.98rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+
+    text-align: center;
+  }
+
+
+  /* ---------- SECTION LABELS ---------- */
+
+  .section-label {
+    font-size: 0.8rem;
+  }
+
+
+  /* ---------- ABOUT ---------- */
+
+  #about {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+
+  .about-heading h2 {
+    font-size: 2.5rem;
+  }
+
+  .about-description p {
+    line-height: 1.7;
+  }
+
+
+  /* ---------- ABOUT CAROUSEL ---------- */
+
+  .about-gallery-section {
+    border-radius: 16px;
+  }
+
+  .about-photo,
+  .about-photo-placeholder {
+    height: 280px;
+
+    border-radius: 12px;
+  }
+
+  .about-carousel-arrow {
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+  }
+
+
+  /* ---------- FBLA INFO ---------- */
+
+  .fbla-info {
+    padding:
+      2rem
+      1.5rem;
+
+    border-radius: 16px;
+  }
+
+  .fbla-info-heading h2 {
+    font-size: 2.2rem;
+  }
+
+  .fbla-info-content p {
+    font-size: 1rem;
+  }
+
+
+  /* ---------- SCHEDULE ---------- */
+
+  #schedule {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .schedule-panel {
+    padding:
+      2rem
+      1.2rem
+      2.5rem;
+
+    border-radius: 16px;
+  }
+
+  #schedule h2 {
+    font-size: 2.3rem;
+  }
+
+  .date-timeline {
+    min-width: 760px;
+  }
+
+
+  /* ---------- EXEC BOARD ---------- */
+
+  #exec-board {
+    padding-top: 1rem;
+    padding-bottom: 5rem;
+  }
+
+  .exec-panel {
+    padding:
+      2rem
+      0.8rem
+      2.5rem;
+
+    border-radius: 16px;
+  }
+
+  #exec-board h2 {
+    font-size: 2.7rem;
+
+    padding-left: 0.5rem;
+  }
+
+  .exec-panel .section-label {
+    padding-left: 0.5rem;
+  }
+
+  /*
+    ONE board member per page on phones.
+  */
+
+  .exec-card {
+    flex: 0 0 100%;
+
+    padding:
+      1.8rem
+      1rem
+      2rem;
+  }
+
+  .exec-photo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .exec-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .exec-card p {
+    font-size: 1rem;
+  }
+
+  .exec-carousel {
+    gap: 0.4rem;
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+  }
+
+}
