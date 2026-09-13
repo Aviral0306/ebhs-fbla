@@ -1,0 +1,854 @@
+// ============================================================
+// SCHEDULE TIMELINE
+//
+// Automatically positions events based on their dates.
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const timeline =
+    document.querySelector(".date-timeline");
+
+  const monthTicksContainer =
+    document.querySelector(".month-ticks");
+
+  const events =
+    Array.from(
+      document.querySelectorAll(".h-event")
+    );
+
+
+  if (
+    !timeline ||
+    !monthTicksContainer ||
+    events.length === 0
+  ) {
+    return;
+  }
+
+
+  // ----------------------------------------------------------
+  // Read all event dates
+  // ----------------------------------------------------------
+
+  const eventDates =
+    events.map(function (event) {
+      return new Date(
+        event.dataset.date + "T00:00:00"
+      );
+    });
+
+
+  // ----------------------------------------------------------
+  // Find earliest and latest events
+  // ----------------------------------------------------------
+
+  const earliest =
+    new Date(
+      Math.min(
+        ...eventDates.map(
+          date => date.getTime()
+        )
+      )
+    );
+
+
+  const latest =
+    new Date(
+      Math.max(
+        ...eventDates.map(
+          date => date.getTime()
+        )
+      )
+    );
+
+
+  // ----------------------------------------------------------
+  // Timeline starts at first day of earliest month
+  // and ends at first day after latest month.
+  // ----------------------------------------------------------
+
+  const rangeStart =
+    new Date(
+      earliest.getFullYear(),
+      earliest.getMonth(),
+      1
+    );
+
+
+  const rangeEnd =
+    new Date(
+      latest.getFullYear(),
+      latest.getMonth() + 1,
+      1
+    );
+
+
+  const msPerDay =
+    1000 *
+    60 *
+    60 *
+    24;
+
+
+  const totalDays =
+    (rangeEnd - rangeStart) /
+    msPerDay;
+
+
+  // ----------------------------------------------------------
+  // Convert a date into a percentage position.
+  // ----------------------------------------------------------
+
+  function percentForDate(date) {
+
+    const daysFromStart =
+      (date - rangeStart) /
+      msPerDay;
+
+
+    return (
+      daysFromStart /
+      totalDays
+    ) * 100;
+  }
+
+
+  // ----------------------------------------------------------
+  // Position each event.
+  // ----------------------------------------------------------
+
+  events.forEach(
+    function (event, index) {
+
+      const percentage =
+        percentForDate(
+          eventDates[index]
+        );
+
+
+      event.style.left =
+        percentage + "%";
+    }
+  );
+
+
+  // ----------------------------------------------------------
+  // Generate month ticks.
+  // ----------------------------------------------------------
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+
+  monthTicksContainer.innerHTML = "";
+
+
+  let cursor =
+    new Date(rangeStart);
+
+
+  while (cursor <= rangeEnd) {
+
+    const percentage =
+      percentForDate(cursor);
+
+
+    const tick =
+      document.createElement("div");
+
+
+    tick.className =
+      "month-tick";
+
+
+    tick.style.left =
+      percentage + "%";
+
+
+    const label =
+      document.createElement("span");
+
+
+    label.textContent =
+      monthNames[
+        cursor.getMonth()
+      ];
+
+
+    tick.appendChild(label);
+
+    monthTicksContainer.appendChild(
+      tick
+    );
+
+
+    cursor =
+      new Date(
+        cursor.getFullYear(),
+        cursor.getMonth() + 1,
+        1
+      );
+  }
+
+});
+
+
+// ============================================================
+// FADE SECTIONS INTO VIEW
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const sections =
+      document.querySelectorAll(
+        ".fade-section"
+      );
+
+
+    if (sections.length === 0) {
+      return;
+    }
+
+
+    const observer =
+      new IntersectionObserver(
+
+        function (entries) {
+
+          entries.forEach(
+            function (entry) {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add(
+                  "visible"
+                );
+
+
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.15
+        }
+
+      );
+
+
+    sections.forEach(
+      function (section) {
+
+        observer.observe(section);
+
+      }
+    );
+
+  }
+);
+
+
+// ============================================================
+// SCROLL DOWN LABEL
+//
+// Fade the "SCROLL DOWN" label once the user starts scrolling.
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const scrollDown =
+      document.querySelector(
+        ".scroll-down"
+      );
+
+
+    if (!scrollDown) {
+      return;
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      function () {
+
+        if (window.scrollY > 100) {
+
+          scrollDown.classList.add(
+            "scrolled"
+          );
+
+        } else {
+
+          scrollDown.classList.remove(
+            "scrolled"
+          );
+
+        }
+
+      },
+
+      {
+        passive: true
+      }
+    );
+
+  }
+);
+
+
+// ============================================================
+// EXEC BOARD CAROUSEL
+//
+// Three cards are visible at once.
+//
+// Rather than hiding/showing cards, all cards remain in one
+// horizontal row.
+//
+// Clicking arrows or dots moves the entire row smoothly.
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const CARDS_PER_PAGE = 3;
+
+
+    const track =
+      document.getElementById(
+        "execCards"
+      );
+
+
+    const cards =
+      Array.from(
+        document.querySelectorAll(
+          "#execCards .exec-card"
+        )
+      );
+
+
+    const prevBtn =
+      document.querySelector(
+        ".carousel-arrow.prev"
+      );
+
+
+    const nextBtn =
+      document.querySelector(
+        ".carousel-arrow.next"
+      );
+
+
+    const dotsContainer =
+      document.getElementById(
+        "execDots"
+      );
+
+
+    if (
+      !track ||
+      cards.length === 0 ||
+      !prevBtn ||
+      !nextBtn ||
+      !dotsContainer
+    ) {
+      return;
+    }
+
+
+    // --------------------------------------------------------
+    // Calculate number of pages.
+    // --------------------------------------------------------
+
+    const totalPages =
+      Math.ceil(
+        cards.length /
+        CARDS_PER_PAGE
+      );
+
+
+    let currentPage = 0;
+
+
+    // --------------------------------------------------------
+    // Build carousel dots.
+    // --------------------------------------------------------
+
+    const dots = [];
+
+
+    for (
+      let i = 0;
+      i < totalPages;
+      i++
+    ) {
+
+      const dot =
+        document.createElement(
+          "button"
+        );
+
+
+      dot.className =
+        "carousel-dot";
+
+
+      dot.setAttribute(
+        "aria-label",
+        "Go to board page " +
+        (i + 1)
+      );
+
+
+      dot.addEventListener(
+        "click",
+        function () {
+
+          goToPage(i);
+
+        }
+      );
+
+
+      dotsContainer.appendChild(
+        dot
+      );
+
+
+      dots.push(dot);
+
+    }
+
+
+    // --------------------------------------------------------
+    // Calculate how far the carousel should move.
+    // --------------------------------------------------------
+
+    function moveCarousel(
+      animate = true
+    ) {
+
+      if (!cards[0]) {
+        return;
+      }
+
+
+      const styles =
+        window.getComputedStyle(
+          track
+        );
+
+
+      const gap =
+        parseFloat(
+          styles.columnGap
+        ) ||
+        parseFloat(
+          styles.gap
+        ) ||
+        0;
+
+
+      const cardWidth =
+        cards[0]
+          .getBoundingClientRect()
+          .width;
+
+
+      /*
+        Move exactly three cards for every page.
+
+        For example:
+
+        Page 0 = 0 cards moved
+        Page 1 = 3 cards moved
+        Page 2 = 6 cards moved
+      */
+
+      const distance =
+        currentPage *
+        CARDS_PER_PAGE *
+        (cardWidth + gap);
+
+
+      if (animate) {
+
+        track.style.transition =
+          "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+
+      } else {
+
+        track.style.transition =
+          "none";
+
+      }
+
+
+      track.style.transform =
+        `translate3d(-${distance}px, 0, 0)`;
+
+    }
+
+
+    // --------------------------------------------------------
+    // Update arrows and navigation dots.
+    // --------------------------------------------------------
+
+    function updateControls() {
+
+      dots.forEach(
+        function (dot, index) {
+
+          dot.classList.toggle(
+            "active",
+            index === currentPage
+          );
+
+        }
+      );
+
+
+      prevBtn.disabled =
+        currentPage === 0;
+
+
+      nextBtn.disabled =
+        currentPage ===
+        totalPages - 1;
+
+    }
+
+
+    // --------------------------------------------------------
+    // Go to page.
+    // --------------------------------------------------------
+
+    function goToPage(page) {
+
+      currentPage =
+        Math.max(
+          0,
+          Math.min(
+            page,
+            totalPages - 1
+          )
+        );
+
+
+      moveCarousel(true);
+
+      updateControls();
+
+    }
+
+
+    // --------------------------------------------------------
+    // Previous arrow.
+    // --------------------------------------------------------
+
+    prevBtn.addEventListener(
+      "click",
+      function () {
+
+        goToPage(
+          currentPage - 1
+        );
+
+      }
+    );
+
+
+    // --------------------------------------------------------
+    // Next arrow.
+    // --------------------------------------------------------
+
+    nextBtn.addEventListener(
+      "click",
+      function () {
+
+        goToPage(
+          currentPage + 1
+        );
+
+      }
+    );
+
+
+    // --------------------------------------------------------
+    // Recalculate carousel position when browser size changes.
+    // --------------------------------------------------------
+
+    let resizeTimer;
+
+
+    window.addEventListener(
+      "resize",
+      function () {
+
+        clearTimeout(
+          resizeTimer
+        );
+
+
+        /*
+          Reposition immediately without animation.
+        */
+
+        moveCarousel(false);
+
+
+        resizeTimer =
+          setTimeout(
+            function () {
+
+              track.style.transition =
+                "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+
+            },
+            100
+          );
+
+      }
+    );
+
+
+    // --------------------------------------------------------
+    // Initial carousel state.
+    // --------------------------------------------------------
+
+    moveCarousel(false);
+
+    updateControls();
+
+  }
+);
+
+
+
+// ============================================================
+// ABOUT PHOTO CAROUSEL
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    const track =
+      document.getElementById(
+        "aboutCarouselTrack"
+      );
+
+
+    const slides =
+      Array.from(
+        document.querySelectorAll(
+          ".about-slide"
+        )
+      );
+
+
+    const prevButton =
+      document.querySelector(
+        ".about-prev"
+      );
+
+
+    const nextButton =
+      document.querySelector(
+        ".about-next"
+      );
+
+
+    const dotsContainer =
+      document.getElementById(
+        "aboutCarouselDots"
+      );
+
+
+    if (
+      !track ||
+      slides.length === 0 ||
+      !prevButton ||
+      !nextButton ||
+      !dotsContainer
+    ) {
+      return;
+    }
+
+
+    let currentSlide = 0;
+
+    const dots = [];
+
+
+    // --------------------------------------------------------
+    // CREATE DOTS
+    // --------------------------------------------------------
+
+    slides.forEach(
+      function (_, index) {
+
+        const dot =
+          document.createElement(
+            "button"
+          );
+
+
+        dot.className =
+          "about-carousel-dot";
+
+
+        dot.setAttribute(
+          "aria-label",
+          "Go to photo " +
+          (index + 1)
+        );
+
+
+        dot.addEventListener(
+          "click",
+          function () {
+
+            goToSlide(index);
+
+          }
+        );
+
+
+        dotsContainer.appendChild(dot);
+
+        dots.push(dot);
+
+      }
+    );
+
+
+    // --------------------------------------------------------
+    // MOVE CAROUSEL
+    // --------------------------------------------------------
+
+    function moveCarousel() {
+
+      const distance =
+        currentSlide * 100;
+
+
+      track.style.transform =
+        `translateX(-${distance}%)`;
+
+    }
+
+
+    // --------------------------------------------------------
+    // UPDATE CONTROLS
+    // --------------------------------------------------------
+
+    function updateControls() {
+
+      dots.forEach(
+        function (dot, index) {
+
+          dot.classList.toggle(
+            "active",
+            index === currentSlide
+          );
+
+        }
+      );
+
+
+      prevButton.disabled =
+        currentSlide === 0;
+
+
+      nextButton.disabled =
+        currentSlide ===
+        slides.length - 1;
+
+    }
+
+
+    // --------------------------------------------------------
+    // GO TO SLIDE
+    // --------------------------------------------------------
+
+    function goToSlide(index) {
+
+      currentSlide =
+        Math.max(
+          0,
+          Math.min(
+            index,
+            slides.length - 1
+          )
+        );
+
+
+      moveCarousel();
+
+      updateControls();
+
+    }
+
+
+    // --------------------------------------------------------
+    // BUTTONS
+    // --------------------------------------------------------
+
+    prevButton.addEventListener(
+      "click",
+      function () {
+
+        goToSlide(
+          currentSlide - 1
+        );
+
+      }
+    );
+
+
+    nextButton.addEventListener(
+      "click",
+      function () {
+
+        goToSlide(
+          currentSlide + 1
+        );
+
+      }
+    );
+
+
+    // Initial state
+
+    moveCarousel();
+
+    updateControls();
+
+  }
+);
