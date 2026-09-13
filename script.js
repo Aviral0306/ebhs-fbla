@@ -162,20 +162,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
   while (cursor <= rangeEnd) {
 
-    const percentage =
-      percentForDate(cursor);
+    const pct = percentForDate(cursor);
 
+const tick = document.createElement("div");
+tick.className = "month-tick";
 
-    const tick =
-      document.createElement("div");
+/*
+  Keep the first and last month labels inside
+  the visible timeline area.
+*/
 
+if (pct <= 0) {
 
-    tick.className =
-      "month-tick";
+  tick.style.left = "20px";
 
+  tick.style.transform = "translateX(0)";
 
-    tick.style.left =
-      percentage + "%";
+} else if (pct >= 100) {
+
+  tick.style.left = "calc(100% - 20px)";
+
+  tick.style.transform = "translateX(-100%)";
+
+} else {
+
+  tick.style.left = pct + "%";
+
+}
 
 
     const label =
