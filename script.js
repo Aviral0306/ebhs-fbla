@@ -321,107 +321,110 @@ document.addEventListener(
 
 
 // ============================================================
-// EXEC BOARD CAROUSEL
+// RESPONSIVE EXEC BOARD CAROUSEL
 //
-// Three cards are visible at once.
+// Desktop: shows 3 cards
+// Tablet:  shows 2 cards
+// Phone:   shows 1 card
 //
-// Rather than hiding/showing cards, all cards remain in one
-// horizontal row.
-//
-// Clicking arrows or dots moves the entire row smoothly.
+// Every arrow click moves ONE card.
 // ============================================================
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const CARDS_PER_PAGE = 3;
+  const track = document.getElementById("execCards");
 
+  const cards = Array.from(
+    document.querySelectorAll("#execCards .exec-card")
+  );
 
-    const track =
-      document.getElementById(
-        "execCards"
-      );
+  const prevBtn = document.querySelector(
+    ".carousel-arrow.prev"
+  );
 
+  const nextBtn = document.querySelector(
+    ".carousel-arrow.next"
+  );
 
-    const cards =
-      Array.from(
-        document.querySelectorAll(
-          "#execCards .exec-card"
-        )
-      );
-
-
-    const prevBtn =
-      document.querySelector(
-        ".carousel-arrow.prev"
-      );
+  const dotsContainer = document.getElementById(
+    "execDots"
+  );
 
 
-    const nextBtn =
-      document.querySelector(
-        ".carousel-arrow.next"
-      );
+  if (
+    !track ||
+    cards.length === 0 ||
+    !prevBtn ||
+    !nextBtn ||
+    !dotsContainer
+  ) {
+    return;
+  }
 
 
-    const dotsContainer =
-      document.getElementById(
-        "execDots"
-      );
+  let currentIndex = 0;
+
+  let cardsVisible = getCardsVisible();
+
+  let maxIndex = Math.max(
+    0,
+    cards.length - cardsVisible
+  );
+
+  let dots = [];
 
 
-    if (
-      !track ||
-      cards.length === 0 ||
-      !prevBtn ||
-      !nextBtn ||
-      !dotsContainer
-    ) {
-      return;
+  // ==========================================================
+  // HOW MANY CARDS SHOULD BE VISIBLE?
+  // ==========================================================
+
+  function getCardsVisible() {
+
+    if (window.innerWidth <= 600) {
+      return 1;
     }
 
+    if (window.innerWidth <= 900) {
+      return 2;
+    }
 
-    // --------------------------------------------------------
-    // Calculate number of pages.
-    // --------------------------------------------------------
-
-    const totalPages =
-      Math.ceil(
-        cards.length /
-        CARDS_PER_PAGE
-      );
+    return 3;
+  }
 
 
-    let currentPage = 0;
+  // ==========================================================
+  // BUILD DOTS
+  //
+  // One dot for every possible carousel position.
+  // ==========================================================
 
+  function buildDots() {
 
-    // --------------------------------------------------------
-    // Build carousel dots.
-    // --------------------------------------------------------
+    dotsContainer.innerHTML = "";
 
-    const dots = [];
+    dots = [];
+
+    maxIndex = Math.max(
+      0,
+      cards.length - cardsVisible
+    );
 
 
     for (
       let i = 0;
-      i < totalPages;
+      i <= maxIndex;
       i++
     ) {
 
-      const dot =
-        document.createElement(
-          "button"
-        );
+      const dot = document.createElement(
+        "button"
+      );
 
-
-      dot.className =
-        "carousel-dot";
-
+      dot.className = "carousel-dot";
 
       dot.setAttribute(
         "aria-label",
-        "Go to board page " +
-        (i + 1)
+        "Go to board position " + (i + 1)
       );
 
 
@@ -429,225 +432,230 @@ document.addEventListener(
         "click",
         function () {
 
-          goToPage(i);
+          goToIndex(i);
 
         }
       );
 
 
-      dotsContainer.appendChild(
-        dot
-      );
-
+      dotsContainer.appendChild(dot);
 
       dots.push(dot);
 
     }
 
-
-    // --------------------------------------------------------
-    // Calculate how far the carousel should move.
-    // --------------------------------------------------------
-
-    function moveCarousel(
-      animate = true
-    ) {
-
-      if (!cards[0]) {
-        return;
-      }
+  }
 
 
-      const styles =
-        window.getComputedStyle(
-          track
-        );
+  // ==========================================================
+  // MOVE CAROUSEL
+  // ==========================================================
+
+  function moveCarousel(animate = true) {
+
+    const styles = window.getComputedStyle(
+      track
+    );
 
 
-      const gap =
-        parseFloat(
-          styles.columnGap
-        ) ||
-        parseFloat(
-          styles.gap
-        ) ||
-        0;
+    const gap =
+      parseFloat(styles.gap) || 0;
 
 
-      const cardWidth =
-        cards[0]
-          .getBoundingClientRect()
-          .width;
+    const cardWidth =
+      cards[0]
+        .getBoundingClientRect()
+        .width;
 
 
-      /*
-        Move exactly three cards for every page.
+    /*
+      IMPORTANT:
 
-        For example:
+      Move ONE card at a time.
 
-        Page 0 = 0 cards moved
-        Page 1 = 3 cards moved
-        Page 2 = 6 cards moved
-      */
+      Previous version multiplied by cardsPerPage,
+      which caused the carousel to jump several cards.
+    */
 
-      const distance =
-        currentPage *
-        CARDS_PER_PAGE *
-        (cardWidth + gap);
+    const distance =
+      currentIndex *
+      (cardWidth + gap);
 
 
-      if (animate) {
-
-        track.style.transition =
-          "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
-
-      } else {
-
-        track.style.transition =
-          "none";
-
-      }
+    track.style.transition =
+      animate
+        ? "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)"
+        : "none";
 
 
-      track.style.transform =
-        `translate3d(-${distance}px, 0, 0)`;
+    track.style.transform =
+      `translate3d(-${distance}px, 0, 0)`;
 
-    }
-
-
-    // --------------------------------------------------------
-    // Update arrows and navigation dots.
-    // --------------------------------------------------------
-
-    function updateControls() {
-
-      dots.forEach(
-        function (dot, index) {
-
-          dot.classList.toggle(
-            "active",
-            index === currentPage
-          );
-
-        }
-      );
+  }
 
 
-      prevBtn.disabled =
-        currentPage === 0;
+  // ==========================================================
+  // UPDATE ARROWS + DOTS
+  // ==========================================================
 
+  function updateControls() {
 
-      nextBtn.disabled =
-        currentPage ===
-        totalPages - 1;
+    dots.forEach(
+      function (dot, index) {
 
-    }
-
-
-    // --------------------------------------------------------
-    // Go to page.
-    // --------------------------------------------------------
-
-    function goToPage(page) {
-
-      currentPage =
-        Math.max(
-          0,
-          Math.min(
-            page,
-            totalPages - 1
-          )
-        );
-
-
-      moveCarousel(true);
-
-      updateControls();
-
-    }
-
-
-    // --------------------------------------------------------
-    // Previous arrow.
-    // --------------------------------------------------------
-
-    prevBtn.addEventListener(
-      "click",
-      function () {
-
-        goToPage(
-          currentPage - 1
+        dot.classList.toggle(
+          "active",
+          index === currentIndex
         );
 
       }
     );
 
 
-    // --------------------------------------------------------
-    // Next arrow.
-    // --------------------------------------------------------
+    prevBtn.disabled =
+      currentIndex === 0;
 
-    nextBtn.addEventListener(
-      "click",
-      function () {
 
-        goToPage(
-          currentPage + 1
-        );
+    nextBtn.disabled =
+      currentIndex === maxIndex;
 
-      }
+  }
+
+
+  // ==========================================================
+  // GO TO A POSITION
+  // ==========================================================
+
+  function goToIndex(index) {
+
+    currentIndex = Math.max(
+      0,
+      Math.min(
+        index,
+        maxIndex
+      )
     );
 
 
-    // --------------------------------------------------------
-    // Recalculate carousel position when browser size changes.
-    // --------------------------------------------------------
-
-    let resizeTimer;
-
-
-    window.addEventListener(
-      "resize",
-      function () {
-
-        clearTimeout(
-          resizeTimer
-        );
-
-
-        /*
-          Reposition immediately without animation.
-        */
-
-        moveCarousel(false);
-
-
-        resizeTimer =
-          setTimeout(
-            function () {
-
-              track.style.transition =
-                "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
-
-            },
-            100
-          );
-
-      }
-    );
-
-
-    // --------------------------------------------------------
-    // Initial carousel state.
-    // --------------------------------------------------------
-
-    moveCarousel(false);
+    moveCarousel(true);
 
     updateControls();
 
   }
-);
 
+
+  // ==========================================================
+  // PREVIOUS
+  // ==========================================================
+
+  prevBtn.addEventListener(
+    "click",
+    function () {
+
+      goToIndex(
+        currentIndex - 1
+      );
+
+    }
+  );
+
+
+  // ==========================================================
+  // NEXT
+  // ==========================================================
+
+  nextBtn.addEventListener(
+    "click",
+    function () {
+
+      goToIndex(
+        currentIndex + 1
+      );
+
+    }
+  );
+
+
+  // ==========================================================
+  // HANDLE WINDOW RESIZE
+  // ==========================================================
+
+  let resizeTimer;
+
+
+  window.addEventListener(
+    "resize",
+    function () {
+
+      clearTimeout(resizeTimer);
+
+
+      resizeTimer = setTimeout(
+        function () {
+
+          const newCardsVisible =
+            getCardsVisible();
+
+
+          if (
+            newCardsVisible !==
+            cardsVisible
+          ) {
+
+            cardsVisible =
+              newCardsVisible;
+
+
+            maxIndex = Math.max(
+              0,
+              cards.length - cardsVisible
+            );
+
+
+            /*
+              If we're too far to the right after resizing,
+              move back to the last valid position.
+            */
+
+            if (
+              currentIndex >
+              maxIndex
+            ) {
+
+              currentIndex =
+                maxIndex;
+
+            }
+
+
+            buildDots();
+
+          }
+
+
+          moveCarousel(false);
+
+          updateControls();
+
+        },
+        100
+      );
+
+    }
+  );
+
+
+  // ==========================================================
+  // INITIAL SETUP
+  // ==========================================================
+
+  buildDots();
+
+  moveCarousel(false);
+
+  updateControls();
+
+});
 
 
 // ============================================================
