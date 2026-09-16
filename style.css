@@ -2662,3 +2662,82 @@ header {
   }
 
 }
+
+/* ============================================================
+   FIX TIMELINE TOOLTIPS NEAR THE EDGES
+   ============================================================ */
+
+/*
+  The first two events are close to the left edge of the
+  timeline. Instead of centering their tooltip over the dot,
+  make the tooltip open toward the RIGHT.
+*/
+
+.h-event[data-date="2026-09-15"] .h-tooltip,
+.h-event[data-date="2026-10-01"] .h-tooltip {
+  left: 0;
+  right: auto;
+
+  transform: translateX(0) translateY(6px);
+}
+
+
+/*
+  Keep the little triangle underneath the tooltip
+  pointing toward the event dot.
+*/
+
+.h-event[data-date="2026-09-15"] .h-tooltip::after,
+.h-event[data-date="2026-10-01"] .h-tooltip::after {
+  left: 10px;
+  right: auto;
+
+  transform: none;
+}
+
+
+/*
+  Hover, keyboard focus, and mobile tap state.
+*/
+
+.h-event[data-date="2026-09-15"]:hover .h-tooltip,
+.h-event[data-date="2026-09-15"]:focus .h-tooltip,
+.h-event[data-date="2026-09-15"].tooltip-open .h-tooltip,
+
+.h-event[data-date="2026-10-01"]:hover .h-tooltip,
+.h-event[data-date="2026-10-01"]:focus .h-tooltip,
+.h-event[data-date="2026-10-01"].tooltip-open .h-tooltip {
+  transform: translateX(0) translateY(0);
+}
+
+
+/* ============================================================
+   FIX EVENTS NEAR THE RIGHT EDGE TOO
+   ============================================================ */
+
+/*
+  Do the opposite for the final event so its tooltip
+  cannot get clipped on the right side.
+*/
+
+.h-event[data-date="2027-05-19"] .h-tooltip {
+  left: auto;
+  right: 0;
+
+  transform: translateX(0) translateY(6px);
+}
+
+
+.h-event[data-date="2027-05-19"] .h-tooltip::after {
+  left: auto;
+  right: 10px;
+
+  transform: none;
+}
+
+
+.h-event[data-date="2027-05-19"]:hover .h-tooltip,
+.h-event[data-date="2027-05-19"]:focus .h-tooltip,
+.h-event[data-date="2027-05-19"].tooltip-open .h-tooltip {
+  transform: translateX(0) translateY(0);
+}
