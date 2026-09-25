@@ -73,8 +73,7 @@ body {
   font-family: "HK Grotesk";
 
   src:
-    url("fonts/HKGrotesk-Regular.otf")
-    format("opentype");
+    url("fonts/HKGrotesk-Regular.otf") format("opentype");
 
   font-weight: 400;
 
@@ -89,8 +88,7 @@ body {
   font-family: "HK Grotesk";
 
   src:
-    url("fonts/HKGrotesk-SemiBold.otf")
-    format("opentype");
+    url("fonts/HKGrotesk-SemiBold.otf") format("opentype");
 
   font-weight: 600;
 
@@ -105,8 +103,7 @@ body {
   font-family: "HK Grotesk";
 
   src:
-    url("fonts/HKGrotesk-Bold.otf")
-    format("opentype");
+    url("fonts/HKGrotesk-Bold.otf") format("opentype");
 
   font-weight: 700;
 
@@ -201,25 +198,19 @@ nav {
   width: 100%;
 
   padding:
-    1rem
-    4rem;
+    1rem 4rem;
 
   background:
-    rgba(
-      238,
+    rgba(238,
       241,
       245,
-      0.92
-    );
+      0.92);
 
   border-bottom:
-    1px solid
-    rgba(
-      20,
+    1px solid rgba(20,
       49,
       94,
-      0.08
-    );
+      0.08);
 
   backdrop-filter:
     blur(12px);
@@ -278,9 +269,7 @@ nav a {
   text-decoration: none;
 
   transition:
-    color
-    0.2s
-    ease;
+    color 0.2s ease;
 
 }
 
@@ -303,14 +292,10 @@ header {
   position: relative;
 
   min-height:
-    calc(
-      100vh - 70px
-    );
+    calc(100vh - 70px);
 
   padding:
-    2rem
-    4rem
-    5rem;
+    2rem 4rem 5rem;
 
 }
 
@@ -344,11 +329,7 @@ header {
     translateY(40px);
 
   animation:
-    heroFadeUp
-    0.8s
-    ease
-    0.1s
-    forwards;
+    heroFadeUp 0.8s ease 0.1s forwards;
 
 }
 
@@ -396,8 +377,7 @@ header {
   background: #ffffff;
 
   border:
-    4px solid
-    var(--text-color);
+    4px solid var(--text-color);
 
   border-radius: 12px;
 
@@ -416,11 +396,7 @@ header {
     translateY(40px);
 
   animation:
-    heroFadeUp
-    0.8s
-    ease
-    0.25s
-    forwards;
+    heroFadeUp 0.8s ease 0.25s forwards;
 
 }
 
@@ -510,8 +486,7 @@ header {
   display: inline-block;
 
   padding:
-    0.9rem
-    1.8rem;
+    0.9rem 1.8rem;
 
   background:
     var(--secondary-color);
@@ -525,12 +500,8 @@ header {
   text-decoration: none;
 
   transition:
-    background
-    0.2s
-    ease,
-    color
-    0.2s
-    ease;
+    background 0.2s ease,
+    color 0.2s ease;
 
 }
 
@@ -550,8 +521,7 @@ header {
   background: transparent;
 
   border:
-    2px solid
-    var(--secondary-color);
+    2px solid var(--secondary-color);
 
   color:
     var(--primary-color);
@@ -592,8 +562,7 @@ header {
   gap: 0.35rem;
 
   transform:
-    translateX(-50%)
-    translateY(0);
+    translateX(-50%) translateY(0);
 
   color: #526071;
 
@@ -606,12 +575,8 @@ header {
   opacity: 1;
 
   transition:
-    opacity
-    0.4s
-    ease,
-    transform
-    0.4s
-    ease;
+    opacity 0.4s ease,
+    transform 0.4s ease;
 
 }
 
@@ -622,8 +587,7 @@ header {
   opacity: 0;
 
   transform:
-    translateX(-50%)
-    translateY(-10px);
+    translateX(-50%) translateY(-10px);
 
   pointer-events: none;
 
@@ -643,12 +607,8 @@ header {
     translateY(40px);
 
   transition:
-    opacity
-    0.8s
-    ease,
-    transform
-    0.8s
-    ease;
+    opacity 0.8s ease,
+    transform 0.8s ease;
 
 }
 
@@ -695,8 +655,7 @@ header {
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1.05fr)
-    minmax(0, 0.95fr);
+    minmax(0, 1.05fr) minmax(0, 0.95fr);
 
   gap: 4rem;
 
@@ -770,8 +729,7 @@ header {
   display: flex;
 
   transition:
-    transform 0.6s
-    cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 
   will-change: transform;
 }
@@ -932,9 +890,7 @@ header {
 
   #about {
     padding:
-      3rem
-      1rem
-      5rem;
+      3rem 1rem 5rem;
   }
 
 
@@ -993,9 +949,7 @@ header {
 #schedule {
 
   padding:
-    4rem
-    2rem
-    6rem;
+    4rem 2rem 6rem;
 
 }
 
@@ -1010,28 +964,20 @@ header {
   margin: 0 auto;
 
   padding:
-    3.5rem
-    3.5rem
-    4rem;
+    3.5rem 3.5rem 4rem;
 
   background: #ffffff;
 
   border:
-    1px solid
-    #e6eaf0;
+    1px solid #e6eaf0;
 
   border-radius: 20px;
 
   box-shadow:
-    0
-    20px
-    50px
-    rgba(
-      20,
+    0 20px 50px rgba(20,
       40,
       70,
-      0.08
-    );
+      0.08);
 
   /*
     Important:
@@ -1100,9 +1046,7 @@ header {
   margin: 0;
 
   padding:
-    40px
-    20px
-    0;
+    40px 20px 0;
 
 }
 
@@ -1205,10 +1149,8 @@ header {
   cursor: pointer;
 
   transform:
-    translate(
-      -50%,
-      -50%
-    );
+    translate(-50%,
+      -50%);
 
   -webkit-tap-highlight-color:
     transparent;
@@ -1235,17 +1177,14 @@ header {
     var(--primary-color);
 
   border:
-    4px solid
-    #ffffff;
+    4px solid #ffffff;
 
   border-radius: 50%;
 
   cursor: pointer;
 
   transition:
-    transform
-    0.2s
-    ease;
+    transform 0.2s ease;
 
 }
 
@@ -1271,15 +1210,12 @@ header {
   position: absolute;
 
   bottom:
-    calc(
-      100% + 16px
-    );
+    calc(100% + 16px);
 
   left: 50%;
 
   padding:
-    0.7rem
-    1rem;
+    0.7rem 1rem;
 
   background:
     var(--text-color);
@@ -1299,16 +1235,11 @@ header {
   white-space: nowrap;
 
   transform:
-    translateX(-50%)
-    translateY(6px);
+    translateX(-50%) translateY(6px);
 
   transition:
-    opacity
-    0.25s
-    ease,
-    transform
-    0.25s
-    ease;
+    opacity 0.25s ease,
+    transform 0.25s ease;
 
 }
 
@@ -1325,8 +1256,7 @@ header {
   left: 50%;
 
   border:
-    6px solid
-    transparent;
+    6px solid transparent;
 
   border-top-color:
     var(--text-color);
@@ -1347,8 +1277,7 @@ header {
   visibility: visible;
 
   transform:
-    translateX(-50%)
-    translateY(0);
+    translateX(-50%) translateY(0);
 
 }
 
@@ -1387,9 +1316,7 @@ header {
 #exec-board {
 
   padding:
-    2rem
-    2rem
-    8rem;
+    2rem 2rem 8rem;
 
 }
 
@@ -1402,28 +1329,20 @@ header {
   margin: 0 auto;
 
   padding:
-    3.5rem
-    3.5rem
-    4rem;
+    3.5rem 3.5rem 4rem;
 
   background: #ffffff;
 
   border:
-    1px solid
-    #e6eaf0;
+    1px solid #e6eaf0;
 
   border-radius: 20px;
 
   box-shadow:
-    0
-    20px
-    50px
-    rgba(
-      20,
+    0 20px 50px rgba(20,
       40,
       70,
-      0.08
-    );
+      0.08);
 
 }
 
@@ -1482,21 +1401,15 @@ header {
   width: 100%;
 
   transform:
-    translate3d(
+    translate3d(0,
       0,
-      0,
-      0
-    );
+      0);
 
   transition:
-    transform
-    0.55s
-    cubic-bezier(
-      0.22,
+    transform 0.55s cubic-bezier(0.22,
       1,
       0.36,
-      1
-    );
+      1);
 
   will-change: transform;
 
@@ -1507,23 +1420,15 @@ header {
 .exec-card {
 
   flex:
-    0 0
-    calc(
-      (
-        100% - 4rem
-      ) / 3
-    );
+    0 0 calc((100% - 4rem) / 3);
 
   padding:
-    2rem
-    1.5rem
-    2.2rem;
+    2rem 1.5rem 2.2rem;
 
   background: #ffffff;
 
   border:
-    1px solid
-    #e6eaf0;
+    1px solid #e6eaf0;
 
   border-radius: 16px;
 
@@ -1542,8 +1447,7 @@ header {
   height: 190px;
 
   margin:
-    0 auto
-    1.5rem;
+    0 auto 1.5rem;
 
   object-fit: cover;
 
@@ -1680,8 +1584,7 @@ header {
   background: #ffffff;
 
   border:
-    2px solid
-    #e1e7ef;
+    2px solid #e1e7ef;
 
   border-radius: 50%;
 
@@ -1693,18 +1596,10 @@ header {
   font-size: 1.3rem;
 
   transition:
-    background
-    0.2s
-    ease,
-    border-color
-    0.2s
-    ease,
-    color
-    0.2s
-    ease,
-    opacity
-    0.2s
-    ease;
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
 
 }
 
@@ -1776,12 +1671,8 @@ header {
   cursor: pointer;
 
   transition:
-    background
-    0.2s
-    ease,
-    transform
-    0.2s
-    ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 
 }
 
@@ -1809,8 +1700,7 @@ header {
    TABLET
    ============================================================ */
 
-@media
-  (max-width: 900px) {
+@media (max-width: 900px) {
 
 
   /* NAV */
@@ -1818,8 +1708,7 @@ header {
   nav {
 
     padding:
-      0.9rem
-      1.2rem;
+      0.9rem 1.2rem;
 
   }
 
@@ -1875,9 +1764,7 @@ header {
     min-height: auto;
 
     padding:
-      2rem
-      1.5rem
-      5rem;
+      2rem 1.5rem 5rem;
 
   }
 
@@ -1898,10 +1785,8 @@ header {
   .logo-frame {
 
     width:
-      min(
-        85vw,
-        360px
-      );
+      min(85vw,
+        360px);
 
   }
 
@@ -1927,11 +1812,9 @@ header {
   .hero-text h1 {
 
     font-size:
-      clamp(
-        3rem,
+      clamp(3rem,
         12vw,
-        4rem
-      );
+        4rem);
 
   }
 
@@ -2022,8 +1905,7 @@ header {
   .about-gallery-section {
 
     padding:
-      1.2rem
-      0.8rem;
+      1.2rem 0.8rem;
 
   }
 
@@ -2059,9 +1941,7 @@ header {
   .schedule-panel {
 
     padding:
-      2.5rem
-      1.5rem
-      2.5rem;
+      2.5rem 1.5rem 2.5rem;
 
   }
 
@@ -2097,9 +1977,7 @@ header {
   .exec-panel {
 
     padding:
-      2.5rem
-      1.2rem
-      3rem;
+      2.5rem 1.2rem 3rem;
 
   }
 
@@ -2130,17 +2008,10 @@ header {
   .exec-card {
 
     flex:
-      0 0
-      calc(
-        (
-          100% - 1rem
-        ) / 2
-      );
+      0 0 calc((100% - 1rem) / 2);
 
     padding:
-      1.5rem
-      1rem
-      1.8rem;
+      1.5rem 1rem 1.8rem;
 
   }
 
@@ -2172,8 +2043,7 @@ header {
    MOBILE
    ============================================================ */
 
-@media
-  (max-width: 600px) {
+@media (max-width: 600px) {
 
 
   /* NAV */
@@ -2181,8 +2051,7 @@ header {
   nav {
 
     padding:
-      0.8rem
-      1rem;
+      0.8rem 1rem;
 
   }
 
@@ -2213,9 +2082,7 @@ header {
   header {
 
     padding:
-      1.5rem
-      1.2rem
-      4rem;
+      1.5rem 1.2rem 4rem;
 
   }
 
@@ -2232,10 +2099,8 @@ header {
   .logo-frame {
 
     width:
-      min(
-        82vw,
-        320px
-      );
+      min(82vw,
+        320px);
 
   }
 
@@ -2322,8 +2187,7 @@ header {
   .about-gallery-section {
 
     padding:
-      1rem
-      0.5rem;
+      1rem 0.5rem;
 
     border-radius: 16px;
 
@@ -2368,9 +2232,7 @@ header {
     width: 100%;
 
     padding:
-      2rem
-      1rem
-      1.5rem;
+      2rem 1rem 1.5rem;
 
     border-radius: 16px;
 
@@ -2445,9 +2307,7 @@ header {
   .exec-panel {
 
     padding:
-      2rem
-      0.8rem
-      2.5rem;
+      2rem 0.8rem 2.5rem;
 
     border-radius: 16px;
 
@@ -2465,7 +2325,7 @@ header {
   }
 
 
-  .exec-panel > .section-label {
+  .exec-panel>.section-label {
 
     padding-left: 0.5rem;
 
@@ -2489,9 +2349,7 @@ header {
       0 0 100%;
 
     padding:
-      1.8rem
-      1rem
-      2rem;
+      1.8rem 1rem 2rem;
 
   }
 
@@ -2538,8 +2396,7 @@ header {
    VERY SMALL PHONES
    ============================================================ */
 
-@media
-  (max-width: 400px) {
+@media (max-width: 400px) {
 
 
   nav ul {
@@ -2624,8 +2481,7 @@ header {
    REDUCED MOTION
    ============================================================ */
 
-@media
-  (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
 
 
   html {
@@ -2749,9 +2605,7 @@ header {
 
 #join {
   padding:
-    4rem
-    2rem
-    6rem;
+    4rem 2rem 6rem;
 }
 
 
@@ -2760,27 +2614,15 @@ header {
 
   margin: 0 auto;
 
-  padding:
-    3.5rem;
+  padding: 0;
 
-  background: #ffffff;
+  background: transparent;
 
-  border:
-    1px solid
-    #e6eaf0;
+  border: none;
 
-  border-radius: 20px;
+  border-radius: 0;
 
-  box-shadow:
-    0
-    20px
-    50px
-    rgba(
-      20,
-      40,
-      70,
-      0.08
-    );
+  box-shadow: none;
 }
 
 
@@ -2790,6 +2632,13 @@ header {
   font-size: 3.5rem;
 
   line-height: 1.1;
+}
+
+.join-deadline {
+  margin:
+    1.5rem
+    0
+    2.5rem;
 }
 
 
@@ -2823,8 +2672,7 @@ header {
   display: grid;
 
   grid-template-columns:
-    70px
-    1fr;
+    70px 1fr;
 
   gap: 1.5rem;
 
@@ -2837,8 +2685,7 @@ header {
     var(--base-color);
 
   border:
-    1px solid
-    #e1e7ef;
+    1px solid #e1e7ef;
 
   border-radius: 16px;
 }
@@ -2927,21 +2774,38 @@ header {
 
   #join {
     padding:
-      3rem
-      1rem
-      5rem;
+      3rem 1rem 5rem;
   }
 
 
   .join-panel {
-    padding:
-      2rem
-      1.2rem;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
   }
 
 
-  .join-panel > h2 {
-    font-size: 2.5rem;
+  .join-panel>h2 {
+    margin-bottom: 1rem;
+
+    font-size: 3.5rem;
+
+    line-height: 1.1;
+  }
+
+  .join-deadline {
+    margin:
+      1.5rem 0 2.5rem;
   }
 
 
@@ -2986,24 +2850,19 @@ header {
   gap: 1rem;
 
   margin:
-    1.5rem
-    0
-    3rem;
+    1.5rem 0 3rem;
 
   padding:
-    1rem
-    1.25rem;
+    1rem 1.25rem;
 
   background:
     rgba(111, 155, 212, 0.12);
 
   border:
-    1px solid
-    rgba(111, 155, 212, 0.35);
+    1px solid rgba(111, 155, 212, 0.35);
 
   border-left:
-    5px solid
-    var(--secondary-color);
+    5px solid var(--secondary-color);
 
   border-radius: 10px;
 }
